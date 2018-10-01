@@ -1,6 +1,16 @@
 class Config:
     """flask配置"""
     DEBUG = True
+    # 数据库配置
+    SQL = "mysql"
+    DRIVER = "mysqlclient"
+    USERNAME = "root"
+    PASSWORD = "aaa"
+    HOST = "127.0.0.1"
+    PORT = "3306"
+    DATABASE = "blog"
+    SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%s/%s" % (SQL, USERNAME, PASSWORD, HOST, PORT, DATABASE)
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class DevelopmentConfig(Config):
