@@ -1,8 +1,72 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from blog import db
 from datetime import datetime
 
 
+class User(db.Model):
+    """用户（管理员）"""
+    __tablename__ = "user"  # 表名
+    id = db.Column(db.Integer, primary_key=True)  # 用户id，主键
+    num = db.Column(db.String(24), unique=True, nullable=False)  # 帐号
+    nick_name = db.Column(db.String(64), unique=True, nullable=False)  # 用户名
+    password_hash = db.Column(db.String(128), nullable=False)  # 加密后的密码
+    avatar_url = db.Column(db.String(256))  # 头像的url地址
+
+    @property
+    def password(self):
+        # 密码
+        raise AttributeError("当前属性不可读")
+
+    @password.setter
+    def password(self, value):
+        # 设置（加密）密码
+        self.password_hash = generate_password_hash(value)
+
+    def check_password(self, password):
+        # 验证密码
+        return check_password_hash(self.password_hash, password)
+
+
+class Category(db.Model):
+    """分类"""
+    __tablename__ = "category"  # 表名
+    id = db.Column(db.Integer, primary_key=True)  # id
+    name = db.Column(db.String(64), unique=True, nullable=False)  # 名称
+
+
+class Tag(db.Model):
+    """标签"""
+    __tablename__ = "tag"  # 表名
+    id = db.Column(db.Integer, primary_key=True)  # id
+    name = db.Column(db.String(64), unique=True, nullable=False)  # 名称
+
+
 class Post(db.Model):
     """文章模型"""
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text, nullable=False)
+    __tablename__ = "post"  # 表名
+    id = db.Column(db.Integer, primary_key=True)  # id
+    title = db.Column(db.String(256), nullable=False)  # 标题
+    digest = db.Column(db.String(512), nullable=False)  # 摘要
+    content = db.Column(db.Text, nullable=False)  # 内容
+    author = db.Column(db.Integer, db.ForeignKey("user.id"))  # 作者
+    click = db.Column(db.Integer, default=0)  # 阅读量
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"))  # 分类
+    tag = db.Column(db.Integer, db.ForeignKey("tag.id"))  # 标签
+    create_time = db.Column(db.DateTime, default=datetime.now)  # 创建时间
+    update_time = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+    user = db.relationship("User", lazy="dynamic")
+    comment = db.relationship("Comment", lazy="dynamic")
+
+
+class Comment(db.Model):
+    """评论"""
+    __tablename__ = "comment"  # 表名
+    id = db.Column(db.Integer, primary_key=True)  # 评论id 主键
+    content = db.Column(db.Text, nullable=False)  # 评论内容 不允许为空
+    post_id = db.Column(db.Integer, db.ForeignKey("post.id"))  # 评论文章的id 外键
+    parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"))  # 父评论id 自关联外键
+    nick_name = db.Column(db.String(64), unique=True, nullable=False)  # 用户名，不允许重复为空
+    email = db.Column(db.String(48), nullable=True)  # 邮箱
+    url = db.Column(db.String(48), nullable=True, default="#")  # 网址
+    create_time = db.Column(db.DateTime, default=datetime.now)  # 创建时间

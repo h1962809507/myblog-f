@@ -8,7 +8,7 @@ class Config:
     PASSWORD = "aaa"
     HOST = "127.0.0.1"
     PORT = "3306"
-    DATABASE = "blog"
+    DATABASE = "myblog"
     SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%s/%s" % (SQL, USERNAME, PASSWORD, HOST, PORT, DATABASE)
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
