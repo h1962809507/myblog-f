@@ -1,4 +1,5 @@
 from flask import Flask
+from blog.modules.admin import IndexView
 from config import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
@@ -8,8 +9,8 @@ from flask_babelex import Babel
 # 创建数据库对象
 db = SQLAlchemy()
 
-# admin对象
-blog_admin = Admin(name="博客后台")
+# admin对象endpoint=endpoint, url=url
+blog_admin = Admin(name="博客后台", index_view=IndexView(name='登录'))
 
 
 def create_app(config_name):
