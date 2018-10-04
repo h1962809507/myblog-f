@@ -12,6 +12,8 @@ class User(db.Model):
     password_hash = db.Column(db.String(128), nullable=False)  # 加密后的密码
     avatar_url = db.Column(db.String(256))  # 头像的url地址
 
+    post = db.relationship("Post", backref='user', lazy="dynamic")
+
     @property
     def password(self):
         # 密码
@@ -33,12 +35,16 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # id
     name = db.Column(db.String(64), unique=True, nullable=False)  # 名称
 
+    post = db.relationship("Post", backref='category', lazy="dynamic")
+
 
 class Tag(db.Model):
     """标签"""
     __tablename__ = "tag"  # 表名
     id = db.Column(db.Integer, primary_key=True)  # id
     name = db.Column(db.String(64), unique=True, nullable=False)  # 名称
+
+    post = db.relationship("Post", backref='tag', lazy="dynamic")
 
 
 class Post(db.Model):
@@ -51,12 +57,11 @@ class Post(db.Model):
     author = db.Column(db.Integer, db.ForeignKey("user.id"))  # 作者
     click = db.Column(db.Integer, default=0)  # 阅读量
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"))  # 分类
-    tag = db.Column(db.Integer, db.ForeignKey("tag.id"))  # 标签
+    tag_id = db.Column(db.Integer, db.ForeignKey("tag.id"))  # 标签
     create_time = db.Column(db.DateTime, default=datetime.now)  # 创建时间
     update_time = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    user = db.relationship("User", lazy="dynamic")
-    comment = db.relationship("Comment", lazy="dynamic")
+    comment = db.relationship("Comment", backref='post', lazy="dynamic")
 
 
 class Comment(db.Model):
