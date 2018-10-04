@@ -2,6 +2,7 @@ from flask import Flask
 from config import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
+from flask_babelex import Babel
 
 
 # 创建数据库对象
@@ -21,6 +22,9 @@ def create_app(config_name):
     # 注册蓝图
     from blog.modules.index import index_blu
     app.register_blueprint(index_blu)
+
+    # 汉化
+    babel = Babel(app)
 
     # 初始化数据库对象
     db.init_app(app)

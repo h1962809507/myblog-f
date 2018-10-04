@@ -11,6 +11,7 @@ class Config:
     DATABASE = "myblog"
     SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%s/%s" % (SQL, USERNAME, PASSWORD, HOST, PORT, DATABASE)
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    BABEL_DEFAULT_LOCALE = 'zh_CN'
 
 
 class DevelopmentConfig(Config):
