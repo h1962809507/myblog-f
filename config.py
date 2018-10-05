@@ -1,6 +1,7 @@
 class Config:
     """flask配置"""
     DEBUG = True
+    SECRET_KEY = "myblog"
     # 数据库配置
     SQL = "mysql"
     DRIVER = "mysqlclient"

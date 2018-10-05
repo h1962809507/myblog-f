@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_wtf import CSRFProtect
 from blog.modules.admin import IndexView
 from config import config
 from flask_sqlalchemy import SQLAlchemy
@@ -26,6 +27,8 @@ def create_app(config_name):
 
     # 汉化
     babel = Babel(app)
+
+    CSRFProtect(app)
 
     # 初始化数据库对象
     db.init_app(app)
