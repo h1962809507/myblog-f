@@ -28,6 +28,9 @@ def create_app(config_name):
     from blog.modules.admin import admin_blu
     app.register_blueprint(admin_blu)
 
+    from blog.modules.article import article_blu
+    app.register_blueprint(article_blu)
+
     # 汉化
     babel = Babel(app)
 
