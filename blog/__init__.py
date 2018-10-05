@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_wtf import CSRFProtect
-from blog.modules.admin import IndexView
+from blog.admin.index import IndexView
 from config import config
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
@@ -25,6 +25,9 @@ def create_app(config_name):
     from blog.modules.index import index_blu
     app.register_blueprint(index_blu)
 
+    from blog.modules.admin import admin_blu
+    app.register_blueprint(admin_blu)
+
     # 汉化
     babel = Babel(app)
 
@@ -37,7 +40,7 @@ def create_app(config_name):
     blog_admin.init_app(app)
 
     # 导入admin配置
-    from blog import admin
+    from blog.admin import admin
 
     # 返回app对象
     return app

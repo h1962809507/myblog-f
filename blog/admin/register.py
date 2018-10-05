@@ -7,7 +7,6 @@ from blog.models import User
 class Register (Command):
     def run(self):
         num = input("输入帐号：")
-
         user_num = None
         try:
             user_num = User.query.filter(User.num == num).first()

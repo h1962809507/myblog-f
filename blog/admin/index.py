@@ -6,17 +6,14 @@ from wtforms.validators import DataRequired
 
 
 class LoginForm(FlaskForm):
-    username = StringField("输入昵称", validators=[DataRequired()], render_kw={"placeholder": "请输入用户名"})
+    num = StringField("输入昵称", validators=[DataRequired()], render_kw={"placeholder": "请输入帐号"})
     password = PasswordField("输入密码", validators=[DataRequired()], render_kw={"placeholder": "请输入密码"})
     submit = SubmitField("登录")
 
 
 class IndexView(AdminIndexView):
-    @expose(methods=["POST", "GET"])
+    @expose()
     def index(self):
         login_form = LoginForm()
-        username = login_form.username.data
-        password = login_form.password.data
-        print(username)
-        print(password)
         return render_template("admin/index.html", form=login_form)
+
