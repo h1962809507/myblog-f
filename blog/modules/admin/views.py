@@ -3,6 +3,16 @@ from blog.models import User
 from . import admin_blu
 
 
+admin = False
+
+
+def is_admin(*args):
+    if args:
+        global admin
+        admin = True
+    return admin
+
+
 @admin_blu.route('/login', methods=["POST"])
 def login():
     num = request.form.get("num")
@@ -22,5 +32,7 @@ def login():
     if not user.check_password(password):
         flash("密码错误！")
         return redirect("/admin")
+
+    is_admin(True)
 
     return redirect("/admin/post")

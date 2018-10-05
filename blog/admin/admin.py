@@ -4,8 +4,7 @@ from blog.models import User
 from blog.models import Post
 from blog.models import Category
 from blog.models import Tag
-
-is_true = True
+from blog.modules.admin import is_admin
 
 
 class UserView(ModelView):
@@ -20,7 +19,7 @@ class UserView(ModelView):
     }
 
     def is_accessible(self):
-        return is_true
+        return is_admin()
 
     def __init__(self, session, **kwargs):
         super().__init__(User, session, **kwargs)
@@ -40,7 +39,7 @@ class PostView(ModelView):
     }
 
     def is_accessible(self):
-        return is_true
+        return is_admin()
 
     def __init__(self, session, **kwargs):
         super().__init__(Post, session, **kwargs)
@@ -52,7 +51,7 @@ class CategoryView(ModelView):
     }
 
     def is_accessible(self):
-        return is_true
+        return is_admin()
 
     def __init__(self, session, **kwargs):
         super().__init__(Category, session, **kwargs)
@@ -64,7 +63,7 @@ class TagView(ModelView):
     }
 
     def is_accessible(self):
-        return is_true
+        return is_admin()
 
     def __init__(self, session, **kwargs):
         super().__init__(Tag, session, **kwargs)
