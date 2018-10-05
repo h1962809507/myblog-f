@@ -35,4 +35,4 @@ def login():
 
     is_admin(True)
 
-    return redirect("/admin/post")
+    return redirect("/admin/article")
