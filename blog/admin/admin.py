@@ -1,7 +1,7 @@
 from flask_admin.contrib.sqla import ModelView
 from blog import blog_admin, db
 from blog.models import User
-from blog.models import Post
+from blog.models import Article
 from blog.models import Category
 from blog.models import Tag
 from blog.modules.admin import is_admin
@@ -25,10 +25,11 @@ class UserView(ModelView):
         super().__init__(User, session, **kwargs)
 
 
-class PostView(ModelView):
+class ArticleView(ModelView):
     column_labels = {
         "title": u"标题",
         "digest": u"摘要",
+        "cover_url": u"封面图",
         "content": u"内容",
         "user": u"作者",
         "click": u"点击",
@@ -42,7 +43,7 @@ class PostView(ModelView):
         return is_admin()
 
     def __init__(self, session, **kwargs):
-        super().__init__(Post, session, **kwargs)
+        super().__init__(Article, session, **kwargs)
 
 
 class CategoryView(ModelView):
@@ -69,7 +70,7 @@ class TagView(ModelView):
         super().__init__(Tag, session, **kwargs)
 
 
-blog_admin.add_view(PostView(db.session, name="文章管理"))
+blog_admin.add_view(ArticleView(db.session, name="文章管理"))
 blog_admin.add_view(UserView(db.session, name="用户管理"))
 blog_admin.add_view(CategoryView(db.session, name="分类管理"))
 blog_admin.add_view(TagView(db.session, name="标签管理"))

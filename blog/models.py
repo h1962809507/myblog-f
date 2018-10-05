@@ -12,7 +12,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128), nullable=False)  # 加密后的密码
     avatar_url = db.Column(db.String(256))  # 头像的url地址
 
-    post = db.relationship("Post", backref='user', lazy="dynamic")
+    article = db.relationship("Article", backref='user', lazy="dynamic")
 
     @property
     def password(self):
@@ -35,7 +35,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # id
     name = db.Column(db.String(64), unique=True, nullable=False)  # 名称
 
-    post = db.relationship("Post", backref='category', lazy="dynamic")
+    article = db.relationship("Article", backref='category', lazy="dynamic")
 
 
 class Tag(db.Model):
@@ -44,15 +44,16 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # id
     name = db.Column(db.String(64), unique=True, nullable=False)  # 名称
 
-    post = db.relationship("Post", backref='tag', lazy="dynamic")
+    article = db.relationship("Article", backref='tag', lazy="dynamic")
 
 
-class Post(db.Model):
+class Article(db.Model):
     """文章模型"""
-    __tablename__ = "post"  # 表名
+    __tablename__ = "article"  # 表名
     id = db.Column(db.Integer, primary_key=True)  # id
     title = db.Column(db.String(256), nullable=False)  # 标题
     digest = db.Column(db.String(512), nullable=False)  # 摘要
+    cover_url = db.Column(db.String(256), nullable=False)  # 封面图
     content = db.Column(db.Text, nullable=False)  # 内容
     author = db.Column(db.Integer, db.ForeignKey("user.id"))  # 作者
     click = db.Column(db.Integer, default=0)  # 阅读量
@@ -61,7 +62,7 @@ class Post(db.Model):
     create_time = db.Column(db.DateTime, default=datetime.now)  # 创建时间
     update_time = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    comment = db.relationship("Comment", backref='post', lazy="dynamic")
+    comment = db.relationship("Comment", backref='article', lazy="dynamic")
 
 
 class Comment(db.Model):
@@ -69,7 +70,7 @@ class Comment(db.Model):
     __tablename__ = "comment"  # 表名
     id = db.Column(db.Integer, primary_key=True)  # 评论id 主键
     content = db.Column(db.Text, nullable=False)  # 评论内容 不允许为空
-    post_id = db.Column(db.Integer, db.ForeignKey("post.id"))  # 评论文章的id 外键
+    article_id = db.Column(db.Integer, db.ForeignKey("article.id"))  # 评论文章的id 外键
     parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"))  # 父评论id 自关联外键
     nick_name = db.Column(db.String(64), unique=True, nullable=False)  # 用户名，不允许重复为空
     email = db.Column(db.String(48), nullable=True)  # 邮箱
