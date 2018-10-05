@@ -93,7 +93,7 @@
                             <div class="meta">
                                 <i class="fa fa-user"></i> {{ article.user.nick_name }} <i class="fa fa-calendar"></i>{{ article.create_time }}<i class="fa fa-comments"></i><span class="data"><a href="#comments">{{ article.comment.count() }}</a></span>
                             </div>
-                            {{ article.content }}
+                            {{ article.content | safe }}
                         </div>
                     </article>
 
