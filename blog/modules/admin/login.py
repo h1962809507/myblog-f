@@ -12,7 +12,11 @@ class LoginForm(FlaskForm):
 
 
 class IndexView(AdminIndexView):
-    @expose()
+    @expose(methods=["POST", "GET"])
     def index(self):
         login_form = LoginForm()
+        username = login_form.username.data
+        password = login_form.password.data
+        print(username)
+        print(password)
         return render_template("admin/index.html", form=login_form)
