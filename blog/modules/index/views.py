@@ -1,9 +1,10 @@
 from flask import render_template
-from blog.models import Article
+from blog.models import Article, Category
 from . import index_blu
 
 
 @index_blu.route('/')
 def index():
     articles = Article.query.order_by(Article.create_time.desc()).all()[:4]
-    return render_template("blog/index.html", articles=articles)
+    categories = Category.query.order_by(Category.id.asc()).all()
+    return render_template("blog/index.html", articles=articles, categories=categories)
