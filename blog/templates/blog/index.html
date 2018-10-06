@@ -52,7 +52,7 @@
                         </header>
                         <div class="body">
                             <ul class="clean-list">
-                                {% for article in articles %}
+                                {% for article in articles[:4] %}
                                 <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
                                 {% endfor %}
                             </ul>
@@ -100,7 +100,7 @@
 
 {% block bottom %}
      <ul class="clean-list">
-        {% for article in articles %}
+        {% for article in articles[:4] %}
         <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
         {% endfor %}
     </ul>
