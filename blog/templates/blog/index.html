@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>首页</title>
+    <title>{{ name }}</title>
 {% endblock title %}
 
 {% block breadcrumb %}
-    <a href="#">首页</a>
+    <a href="#">{{ name }}</a>
 {% endblock breadcrumb %}
 
 {% block main %}
@@ -39,10 +39,12 @@
                         </div>
                         {% endfor %}
                     </div>
-
+                    {% if name == "首页" %}
                     <div class="paging">
-                        <a href="/article/all" class="older">更多>></a>
+                        <a href="/article/all" class="older">全部文章>></a>
                     </div>
+                    {% endif %}
+
                 </div>
                 <aside class="col-md-4 blog-aside">
                     

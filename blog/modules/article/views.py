@@ -1,6 +1,6 @@
 import markdown
 from flask import render_template
-from blog.models import Article
+from blog.models import Article, Category
 from . import article_blu
 
 
@@ -20,4 +20,6 @@ def detail(code):
 @article_blu.route("/article/all")
 def index():
     articles = Article.query.order_by(Article.create_time.desc()).all()
-    return render_template("blog/index.html", articles=articles)
+    categories = Category.query.order_by(Category.id.asc()).all()
+    name = "全部文章"
+    return render_template("blog/index.html", articles=articles, categories=categories, name=name)
