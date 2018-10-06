@@ -14,3 +14,9 @@ def detail(code):
                                       'markdown.extensions.toc',
                                   ])
     return render_template("blog/single.html", article=article)
+
+
+@article_blu.route("/article/all")
+def index():
+    articles = Article.query.order_by(Article.create_time.desc()).all()
+    return render_template("blog/index.html", articles=articles)
