@@ -7,13 +7,14 @@ from . import article_blu
 @article_blu.route("/article/<int:code>")
 def detail(code):
     article = Article.query.get(code)
+    articles = Article.query.order_by(Article.create_time.desc()).all()[:4]
     article.content = markdown.markdown(article.content,
                                   extensions=[
                                       'markdown.extensions.extra',
                                       'markdown.extensions.codehilite',
                                       'markdown.extensions.toc',
                                   ])
-    return render_template("blog/single.html", article=article)
+    return render_template("blog/single.html", article=article, articles=articles)
 
 
 @article_blu.route("/article/all")
