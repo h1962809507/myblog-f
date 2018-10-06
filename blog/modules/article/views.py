@@ -18,8 +18,16 @@ def detail(code):
 
 
 @article_blu.route("/article/all")
-def index():
+def all_articles():
     articles = Article.query.order_by(Article.create_time.desc()).all()
     categories = Category.query.order_by(Category.id.asc()).all()
     name = "全部文章"
+    return render_template("blog/index.html", articles=articles, categories=categories, name=name)
+
+
+@article_blu.route("/category/<int:code>")
+def category(code):
+    articles = Category.query.get(code).article
+    categories = Category.query.order_by(Category.id.asc()).all()
+    name = Category.query.get(code).name
     return render_template("blog/index.html", articles=articles, categories=categories, name=name)

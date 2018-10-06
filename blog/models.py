@@ -40,6 +40,9 @@ class Category(db.Model):
 
     article = db.relationship("Article", backref='category', lazy="dynamic")
 
+    def __repr__(self):
+        return self.name
+
 
 class Tag(db.Model):
     """标签"""
@@ -49,6 +52,8 @@ class Tag(db.Model):
 
     article = db.relationship("Article", backref='tag', lazy="dynamic")
 
+    def __repr__(self):
+        return self.name
 
 class Article(db.Model):
     """文章模型"""
@@ -67,6 +72,9 @@ class Article(db.Model):
 
     comment = db.relationship("Comment", backref='article', lazy="dynamic")
 
+    def __repr__(self):
+        return self.title
+
 
 class Comment(db.Model):
     """评论"""
@@ -79,3 +87,6 @@ class Comment(db.Model):
     email = db.Column(db.String(48), nullable=True)  # 邮箱
     url = db.Column(db.String(48), nullable=True, default="#")  # 网址
     create_time = db.Column(db.DateTime, default=datetime.now)  # 创建时间
+
+    def __repr__(self):
+        return self.content
