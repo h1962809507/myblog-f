@@ -54,7 +54,7 @@
                         </header>
                         <div class="body">
                             <ul class="clean-list">
-                                {% for article in articles[:4] %}
+                                {% for article in context.new_articles %}
                                 <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
                                 {% endfor %}
                             </ul>
@@ -67,7 +67,7 @@
                         </header>
                         <div class="body">
                             <ul class="clean-list">
-                                {% for category in categories %}
+                                {% for category in context.categories %}
                                 <li><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
                                 {% endfor %}
                             </ul>
@@ -80,14 +80,9 @@
                         </header>
                         <div class="body clearfix">
                             <ul class="tags">
-                                <li><a href="#">HTML5</a></li>
-                                <li><a href="#">CSS3</a></li>
-                                <li><a href="#">COMPONENTS</a></li>
-                                <li><a href="#">TEMPLATE</a></li>
-                                <li><a href="#">PLUGIN</a></li>
-                                <li><a href="#">BOOTSTRAP</a></li>
-                                <li><a href="#">TUTORIAL</a></li>
-                                <li><a href="#">UI/UX</a></li>                            
+                                {% for tag in context.tags %}
+                                <li><a href="/tag/{{ tag.id }}">{{ tag.name }}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -99,7 +94,7 @@
 
 {% block bottom %}
      <ul class="clean-list">
-        {% for article in articles[:4] %}
+        {% for article in context.new_articles %}
         <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
         {% endfor %}
     </ul>
