@@ -28,6 +28,9 @@ class User(db.Model):
         # 验证密码
         return check_password_hash(self.password_hash, password)
 
+    def __repr__(self):
+        return self.nick_name
+
 
 class Category(db.Model):
     """分类"""

@@ -26,6 +26,9 @@ class UserView(ModelView):
 
 
 class ArticleView(ModelView):
+
+    column_list = ("title", "digest", "user", "click", "category", "tag", "create_time", "update_time")
+
     column_labels = {
         "title": u"标题",
         "digest": u"摘要",

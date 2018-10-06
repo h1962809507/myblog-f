@@ -1,16 +1,13 @@
-from flask import flash, request, redirect
+from flask import flash, request, redirect, session
 from blog.models import User
 from . import admin_blu
 
 
-admin = False
-
-
-def is_admin(*args):
-    if args:
-        global admin
-        admin = True
-    return admin
+def is_admin():
+    num = session.get("num", None)
+    if num:
+        return True
+    return False
 
 
 @admin_blu.route('/login', methods=["POST"])
@@ -33,6 +30,7 @@ def login():
         flash("密码错误！")
         return redirect("/admin")
 
-    is_admin(True)
+    # 写入session
+    session["num"] = num
 
     return redirect("/admin/article")

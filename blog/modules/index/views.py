@@ -5,5 +5,5 @@ from . import index_blu
 
 @index_blu.route('/')
 def index():
-    articles = Article.query.order_by(Article.create_time.asc()).all()
+    articles = Article.query.order_by(Article.create_time.desc()).all()
     return render_template("blog/index.html", articles=articles)
