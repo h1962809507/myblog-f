@@ -16,4 +16,3 @@ class IndexView(AdminIndexView):
     def index(self):
         login_form = LoginForm()
         return render_template("admin/index.html", form=login_form)
-
