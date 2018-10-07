@@ -2,7 +2,7 @@
 from flask import Blueprint
 
 
-index_blu = Blueprint("index_blu", __name__)
+page_blu = Blueprint("page_blu", __name__)
 
 
 from .views import *

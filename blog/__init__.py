@@ -22,17 +22,14 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     # 注册蓝图
-    from blog.modules.index import index_blu
-    app.register_blueprint(index_blu)
+    from blog.modules.page import page_blu
+    app.register_blueprint(page_blu)
 
     from blog.modules.admin import admin_blu
     app.register_blueprint(admin_blu)
 
     from blog.modules.article import article_blu
     app.register_blueprint(article_blu)
-
-    from blog.modules.about_contact import about_blu
-    app.register_blueprint(about_blu)
 
     # 汉化
     babel = Babel(app)

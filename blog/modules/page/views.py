@@ -1,6 +1,6 @@
 from flask import render_template
 from blog.models import Article, Category, Tag
-from . import index_blu
+from . import page_blu
 
 
 def blog_tag():
@@ -13,7 +13,7 @@ def blog_tag():
     return context
 
 
-@index_blu.route('/')
+@page_blu.route('/')
 def index():
     # 首页视图
     articles = Article.query.order_by(Article.create_time.desc()).all()[:4]
@@ -22,7 +22,7 @@ def index():
     return render_template("blog/index.html", articles=articles, name=name, context=context)
 
 
-@index_blu.route("/article/all")
+@page_blu.route("/article/all")
 def all_articles():
     # 全部文章页视图
     articles = Article.query.order_by(Article.create_time.desc()).all()
@@ -31,7 +31,7 @@ def all_articles():
     return render_template("blog/index.html", articles=articles, name=name, context=context)
 
 
-@index_blu.route("/category/<int:code>")
+@page_blu.route("/category/<int:code>")
 def category(code):
     # 分类页视图
     articles = Category.query.get(code).article
@@ -40,10 +40,24 @@ def category(code):
     return render_template("blog/index.html", articles=articles, name=name, context=context)
 
 
-@index_blu.route("/tag/<int:code>")
+@page_blu.route("/tag/<int:code>")
 def tag(code):
     # 标签页视图
     articles = Tag.query.get(code).article
     name = Tag.query.get(code).name
     context = blog_tag()
     return render_template("blog/index.html", articles=articles, name=name, context=context)
+
+
+@page_blu.route("/about")
+def about():
+    name = "关于"
+    context = blog_tag()
+    return render_template("blog/about.html", name=name, context=context)
+
+
+@page_blu.route("/contact")
+def contact():
+    name = "联系"
+    context = blog_tag()
+    return render_template("blog/contact.html", name=name, context=context)
