@@ -10,7 +10,7 @@ from flask_babelex import Babel
 # 创建数据库对象
 db = SQLAlchemy()
 
-# admin对象endpoint=endpoint, url=url
+# 创建admin对象，首页视图使用重写的IndexView类
 blog_admin = Admin(name="博客后台", index_view=IndexView(name='登录'))
 
 

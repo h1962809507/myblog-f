@@ -5,6 +5,7 @@ from blog.models import User
 
 
 class Register (Command):
+    # 注册管理员账号，加入到flask-script命令中，使用命令创建，不在页面显示
     def run(self):
         num = input("输入帐号：")
         user_num = None

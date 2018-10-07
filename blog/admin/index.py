@@ -14,5 +14,6 @@ class LoginForm(FlaskForm):
 class IndexView(AdminIndexView):
     @expose()
     def index(self):
+        # 重写AdminIndexView类中index方法，在访问后台首页页面时，执行重写的方法
         login_form = LoginForm()
         return render_template("admin/index.html", form=login_form)
