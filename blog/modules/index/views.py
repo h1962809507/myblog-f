@@ -3,15 +3,20 @@ from blog.models import Article, Category, Tag
 from . import index_blu
 
 
-@index_blu.route('/')
-def index():
-    articles = Article.query.order_by(Article.create_time.desc()).all()[:4]
-    name = "首页"
+def blog_tag():
     context = {
         "new_articles": Article.query.order_by(Article.create_time.desc()).all()[:5],
         "categories": Category.query.order_by(Category.id.asc()).all(),
         "tags": Tag.query.order_by(Tag.id.asc()).all()
     }
+    return context
+
+
+@index_blu.route('/')
+def index():
+    articles = Article.query.order_by(Article.create_time.desc()).all()[:4]
+    name = "首页"
+    context = blog_tag()
     return render_template("blog/index.html", articles=articles, name=name, context=context)
 
 
@@ -19,11 +24,7 @@ def index():
 def all_articles():
     articles = Article.query.order_by(Article.create_time.desc()).all()
     name = "全部文章"
-    context = {
-        "new_articles": Article.query.order_by(Article.create_time.desc()).all()[:5],
-        "categories": Category.query.order_by(Category.id.asc()).all(),
-        "tags": Tag.query.order_by(Tag.id.asc()).all()
-    }
+    context = blog_tag()
     return render_template("blog/index.html", articles=articles, name=name, context=context)
 
 
@@ -31,11 +32,7 @@ def all_articles():
 def category(code):
     articles = Category.query.get(code).article
     name = Category.query.get(code).name
-    context = {
-        "new_articles": Article.query.order_by(Article.create_time.desc()).all()[:5],
-        "categories": Category.query.order_by(Category.id.asc()).all(),
-        "tags": Tag.query.order_by(Tag.id.asc()).all()
-    }
+    context = blog_tag()
     return render_template("blog/index.html", articles=articles, name=name, context=context)
 
 
@@ -43,9 +40,5 @@ def category(code):
 def tag(code):
     articles = Tag.query.get(code).article
     name = Tag.query.get(code).name
-    context = {
-        "new_articles": Article.query.order_by(Article.create_time.desc()).all()[:5],
-        "categories": Category.query.order_by(Category.id.asc()).all(),
-        "tags": Tag.query.order_by(Tag.id.asc()).all()
-    }
+    context = blog_tag()
     return render_template("blog/index.html", articles=articles, name=name, context=context)
