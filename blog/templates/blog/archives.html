@@ -17,16 +17,15 @@
                     <div class="row">
 
                         <ul>
-                            {% for article in articles[::-1] %}
-                              <div>
-                                <h2 id="{{article[0]}}">{{article[0]}} 年</h2>
-                                    {# 使用过滤器排序#}
-                                {% for a in article[1] |sort(attribute='create_time',reverse=True)%}
-                                <li>
-                                    <h5><span><a href="/article/{{ a.id }}">{{a.title}}</a>&nbsp;&nbsp;&nbsp;[{{ a.create_time  }}]</span></h5>
-                                </li>
-                                {% endfor %}
-                              </div>
+                            {% for article in articles %}
+                                <h3 id="{{ article }}">{{ article[:4] }} 年 {{ article[4:] }}月</h3>
+                                <ul>
+                                    {% for a in articles[article] %}
+                                    <li>
+                                        <h5><span><a href="/article/{{ a.id }}">{{a.title}}</a></span></h5>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
                             {% endfor %}
                         </ul>
 

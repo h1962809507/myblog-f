@@ -1,9 +1,11 @@
+import collections
 from flask import render_template, current_app
+from flask.json import jsonify
 
 from blog import db
 from blog.models import Article, Category, Tag
 from . import page_blu
-from sqlalchemy import extract
+from sqlalchemy import extract, and_
 
 
 def blog_tag():
@@ -66,12 +68,14 @@ def contact():
 def archive():
     # 归档页面
 
-    archives = db.session.query(extract('year', Article.create_time).label('year')).group_by('year').all()
-
-    articles = []
-    for a in archives:
-        articles.append(
-            (a[0], db.session.query(Article).filter(extract('year', Article.create_time) == a[0]).all()))
-
+    articles = Article.query.order_by(Article.create_time.desc()).all()
+    articles_list = collections.OrderedDict()
+    for article in articles:
+        year = article.create_time.year
+        month = article.create_time.month
+        time = str(year) + str(month)
+        articles_list[time] = db.session.query(Article).filter(
+            and_(extract('year', Article.create_time) == year,
+                 extract('month', Article.create_time) == month)).all()
     name = "归档"
-    return render_template("blog/archives.html", articles=articles, name=name)
+    return render_template("blog/archives.html", articles=articles_list, name=name)
