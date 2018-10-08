@@ -66,12 +66,12 @@ def contact():
 def archive():
     # 归档页面
 
-    archives = db.session.query(extract('month', Article.create_time).label('month')).group_by('month').all()
+    archives = db.session.query(extract('year', Article.create_time).label('year')).group_by('year').all()
 
     articles = []
-    for archive in archives:
+    for a in archives:
         articles.append(
-            (archive[0], db.session.query(Article).filter(extract('month', Article.create_time) == archive[0]).all()))
+            (a[0], db.session.query(Article).filter(extract('year', Article.create_time) == a[0]).all()))
 
     name = "归档"
     return render_template("blog/archives.html", articles=articles, name=name)
