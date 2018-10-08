@@ -103,8 +103,11 @@
 
                     <div class="col-md-4 footer-widget">
                         <h3> <i class="fa fa-pencil"></i> 最新</h3>
-                        {% block bottom %}
-                        {% endblock bottom %}
+                         <ul class="clean-list">
+                            {% for article in blog_tag().new_articles %}
+                            <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
+                            {% endfor %}
+                        </ul>
                     </div>
 
                     <div class="col-md-4 footer-widget">

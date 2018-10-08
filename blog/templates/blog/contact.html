@@ -30,11 +30,3 @@
     </div>
 
     {% endblock main %}
-
-{% block bottom %}
-     <ul class="clean-list">
-        {% for article in context.new_articles %}
-        <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock bottom %}

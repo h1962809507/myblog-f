@@ -21,16 +21,6 @@ def create_app(config_name):
     # 加载配置
     app.config.from_object(config[config_name])
 
-    # 注册蓝图
-    from blog.modules.page import page_blu
-    app.register_blueprint(page_blu)
-
-    from blog.modules.admin import admin_blu
-    app.register_blueprint(admin_blu)
-
-    from blog.modules.article import article_blu
-    app.register_blueprint(article_blu)
-
     # 汉化
     babel = Babel(app)
 
@@ -45,5 +35,20 @@ def create_app(config_name):
     # 导入admin配置
     from blog.admin import admin
 
+    # 注册蓝图
+    from blog.modules.page import page_blu
+    app.register_blueprint(page_blu)
+
+    from blog.modules.admin import admin_blu
+    app.register_blueprint(admin_blu)
+
+    from blog.modules.article import article_blu
+    app.register_blueprint(article_blu)
+
+    # 注册函数
+    from blog.modules.page import blog_tag
+    app.add_template_global(blog_tag)
+
     # 返回app对象
     return app
+

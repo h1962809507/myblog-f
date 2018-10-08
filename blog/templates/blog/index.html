@@ -54,7 +54,7 @@
                         </header>
                         <div class="body">
                             <ul class="clean-list">
-                                {% for article in context.new_articles %}
+                                {% for article in blog_tag().new_articles %}
                                 <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
                                 {% endfor %}
                             </ul>
@@ -67,7 +67,7 @@
                         </header>
                         <div class="body">
                             <ul class="clean-list">
-                                {% for category in context.categories %}
+                                {% for category in blog_tag().categories %}
                                 <li><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
                                 {% endfor %}
                             </ul>
@@ -80,7 +80,7 @@
                         </header>
                         <div class="body clearfix">
                             <ul class="tags">
-                                {% for tag in context.tags %}
+                                {% for tag in blog_tag().tags %}
                                 <li><a href="/tag/{{ tag.id }}">{{ tag.name }}</a></li>
                                 {% endfor %}
                             </ul>
@@ -91,11 +91,3 @@
         </div>
     </div>
 {% endblock main %}
-
-{% block bottom %}
-     <ul class="clean-list">
-        {% for article in context.new_articles %}
-        <li><a href="/article/{{ article.id }}">{{ article.title }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock bottom %}
