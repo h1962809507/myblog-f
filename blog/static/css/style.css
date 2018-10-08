@@ -1353,3 +1353,44 @@ fieldset[disabled] .btn-clean-two.active {
   line-height: normal;
   border-radius: 0px;
 }
+
+/*返回顶部*/
+.box{
+    position:fixed;
+    right:10px;
+    bottom: 20px;
+    height:50px;
+    width: 50px;
+    text-align:center;
+    padding-top:20px;
+    background-color: white;
+    border-radius: 20%;
+    overflow: hidden;
+    border:1px solid rgb(180,180,180);
+}
+.box:hover:before{
+    top:50%
+}
+.box:hover .box-in{
+    visibility: hidden;
+}
+.box:before{
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    content:'回到顶部';
+    width: 40px;
+    color:black;
+    font-weight:bold;
+
+}
+.box-in{
+    visibility: visible;
+    display:inline-block;
+    height:20px;
+    width: 20px;
+    border: 1px solid black;
+    border-color: black transparent transparent black;
+    transform:rotate(45deg);
+}
