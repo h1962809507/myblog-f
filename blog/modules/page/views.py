@@ -1,6 +1,14 @@
-from flask import render_template
+from flask import render_template, current_app
+
+from blog import db
 from blog.models import Article, Category, Tag
 from . import page_blu
+from sqlalchemy import extract
+
+
+# @current_app.template_global()
+# def foo():
+#     return "aa"
 
 
 def blog_tag():
@@ -51,6 +59,7 @@ def tag(code):
 
 @page_blu.route("/about")
 def about():
+    # 关于页面
     name = "关于"
     context = blog_tag()
     return render_template("blog/about.html", name=name, context=context)
@@ -58,6 +67,23 @@ def about():
 
 @page_blu.route("/contact")
 def contact():
+    # 联系页面
     name = "联系"
     context = blog_tag()
     return render_template("blog/contact.html", name=name, context=context)
+
+
+@page_blu.route("/archives")
+def archive():
+    # 归档页面
+
+    archives = db.session.query(extract('month', Article.create_time).label('month')).group_by('month').all()
+
+    articles = []
+    for archive in archives:
+        articles.append(
+            (archive[0], db.session.query(Article).filter(extract('month', Article.create_time) == archive[0]).all()))
+
+    name = "归档"
+    context = blog_tag()
+    return render_template("blog/archives.html", articles=articles, name=name, context=context)
