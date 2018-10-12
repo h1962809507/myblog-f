@@ -11,7 +11,8 @@ class User(db.Model):
     nick_name = db.Column(db.String(64), unique=True, nullable=False)  # 用户名
     password_hash = db.Column(db.String(128), nullable=False)  # 加密后的密码
     avatar_url = db.Column(db.String(256))  # 头像的url地址
-
+    introduce = db.Column(db.String(512))  # 简介
+    contact = db.Column(db.String(512))  # 联系方式
     article = db.relationship("Article", backref='user', lazy="dynamic")
 
     @property

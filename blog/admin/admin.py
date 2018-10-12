@@ -15,7 +15,10 @@ class UserView(ModelView):
             "num": u"帐号",
             "nick_name": u"昵称",
             "password_hash": u"密码",
-            "avatar_url": u"头像"
+            "avatar_url": u"头像",
+            "introduce": u"简介",
+            "contact": u"联系方式"
+
     }
 
     def is_accessible(self):
