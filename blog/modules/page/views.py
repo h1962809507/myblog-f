@@ -1,19 +1,20 @@
 import collections
 from flask import render_template, abort, current_app
 from blog import db
-from blog.models import Article, Category, Tag
+from blog.models import Article, Category, Tag, User
 from . import page_blu
 from sqlalchemy import extract, and_
 
 
 def blog_tag():
-    # 获取侧边栏数据
+    # 获取页面多次使用的数据
     context = dict()
     try:
         context = {
             "new_articles": Article.query.order_by(Article.create_time.desc()).limit(5),
             "categories": Category.query.order_by(Category.id.asc()).all(),
-            "tags": Tag.query.order_by(Tag.id.asc()).all()
+            "tags": Tag.query.order_by(Tag.id.asc()).all(),
+            "user": User.query.get(1)
         }
     except Exception as e:
         current_app.logger.error(e)
@@ -78,8 +79,15 @@ def tag(code):
 @page_blu.route("/about")
 def about():
     # 关于页面
+    introduce = "暂无"
+    try:
+        user = User.query.get(1)
+        introduce = user.introduce
+    except Exception as e:
+        current_app.logger.error(e)
+        abort(500)
     name = "关于"
-    return render_template("blog/about.html", name=name)
+    return render_template("blog/about.html", name=name, introduce=introduce)
 
 
 @page_blu.route("/contact")
