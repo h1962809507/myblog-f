@@ -1,7 +1,5 @@
 import collections
-from flask import render_template, current_app
-from flask.json import jsonify
-
+from flask import render_template
 from blog import db
 from blog.models import Article, Category, Tag
 from . import page_blu
