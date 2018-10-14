@@ -1,0 +1,46 @@
+blockquote {
+    border-left:#eee solid 5px;
+    padding-left:20px;
+}
+
+ul li {
+    line-height: 20px;
+}
+
+pre{
+    border:1px solid rgb(200, 200, 200);
+    background: rgb(245, 245, 245);
+}
+
+code {
+    color:#D34B62;
+}
+
+#oriContent{
+    height:850px;
+    width:600px;
+    float: left;
+}
+
+#result{
+    height:850px;
+    width:600px;
+    padding: 0px;
+    border:1px solid black;
+    float: right;
+    overflow: scroll;
+
+}
+.content{
+    float: right;
+}
+
+.option{
+    float: left;
+}
+
+.submit{
+    width: 100px;
+    height: 40px;
+    float: right;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
+    <script src="../../static/js/article.js"></script>
+    <link rel="stylesheet" href="../../static/css/article.css">
+</head>
+<body>
+    <form method="post" action="/add_article">
+        {{ form.csrf_token }}
+            <div class="option">
+            <p>
+                {{ form.title.label }}：{{ form.title }}
+            </p>
+            <p>
+                {{ form.digest.label }}：{{ form.digest }}
+            </p>
+            <p>
+                {{ form.author.label }}：{{ form.author }}
+            </p>
+            <p>
+                {{ form.category.label }}：{{ form.category }}
+            </p>
+            <p>
+                {{ form.tag.label }}：{{ form.tag }}
+            </p>
+            <p>
+                {{ form.coverlabel }}{{ form.cover }}
+            </p>
+        </div>
+        <div class="content">
+            {{ form.context(id="oriContent", onkeyup="convert()") }}
+            <div id="result"></div>
+            <div>
+                {{ form.submit(class="submit") }}
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

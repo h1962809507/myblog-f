@@ -36,3 +36,10 @@ def login():
     session["num"] = num
 
     return redirect("/admin/article")
+
+
+@admin_blu.route("/add_article", methods=["POST"])
+def add_article():
+    data = request.form
+    print(data)
+    return "xixi"

@@ -1,3 +1,4 @@
+from flask_admin import BaseView, expose
 from flask_admin.contrib.sqla import ModelView
 from blog import blog_admin, db
 from blog.models import User

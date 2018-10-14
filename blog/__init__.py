@@ -46,6 +46,8 @@ def create_app(config_name):
 
     # 初始化admin对象
     blog_admin.init_app(app)
+    from blog.admin.article import AddArticleView
+    blog_admin.add_view(AddArticleView(name='发布文章', endpoint='analytics'))
 
     # 导入admin配置
     from blog.admin import admin
