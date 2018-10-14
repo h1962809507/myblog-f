@@ -1,4 +1,8 @@
-from flask import flash, request, redirect, session
+import time
+
+from flask import flash, request, redirect, session, current_app
+
+from blog.admin.upload_image import storage
 from blog.models import User
 from . import admin_blu
 
@@ -40,6 +44,21 @@ def login():
 
 @admin_blu.route("/add_article", methods=["POST"])
 def add_article():
-    data = request.form
-    print(data)
+    print(request.form)
+    try:
+        img = request.files.get("cover").read()
+    except Exception as e:
+        current_app.logger.error(e)
+        return "图片获取失败"
+
+    date = int(time.time())
+    key = "blog/cover/" + str(date)
+
+    # 图片到七牛
+    try:
+        url = storage(img, key)
+    except Exception as e:
+        current_app.logger.error(e)
+        return "上传图片错误"
+    print("http://image.mxuanli.cn/"+url)
     return "xixi"

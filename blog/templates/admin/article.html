@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
     <script src="../../static/js/article.js"></script>
     <link rel="stylesheet" href="../../static/css/article.css">
 </head>
 <body>
-    <form method="post" action="/add_article">
+    <form id="article">
         {{ form.csrf_token }}
             <div class="option">
             <p>
@@ -34,7 +36,7 @@
             {{ form.context(id="oriContent", onkeyup="convert()") }}
             <div id="result"></div>
             <div>
-                {{ form.submit(class="submit") }}
+                <input type="button" value="发布" class="submit" onclick="ajaxSubmitForm();"/>
             </div>
         </div>
     </form>

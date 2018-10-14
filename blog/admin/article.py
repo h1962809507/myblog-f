@@ -1,6 +1,7 @@
-from flask import current_app, abort
+from flask import current_app, abort, request
 from flask_admin import expose, BaseView
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed, FileRequired
 from wtforms import SelectField, TextAreaField, FileField, SubmitField
 from wtforms.validators import DataRequired
 from blog.models import Category, Tag, User
@@ -16,14 +17,14 @@ class AddArticleForm(FlaskForm):
     tag = SelectField('标签', validators=[DataRequired("请选择")],
                            choices=[])
 
-    cover = FileField("封面", validators=[DataRequired("请输入标题")])
+    cover = FileField("封面", validators=[FileRequired("没有选择文件"), FileAllowed(['jpg', 'png'])])
 
     context = TextAreaField("内容", validators=[DataRequired("请输入内容")])
-    submit = SubmitField("发布")
 
 
 class AddArticleView(BaseView):
-    @expose('/')
+
+    @expose('/', methods=["POST", "GET"])
     def index(self):
         form = AddArticleForm()
         categories = list()
@@ -56,4 +57,5 @@ class AddArticleView(BaseView):
         form.tag.choices += tag_list
 
         form.author.choices += user_list
+
         return self.render('/admin/article.html', form=form)
