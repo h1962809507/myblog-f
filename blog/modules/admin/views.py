@@ -8,14 +8,6 @@ from blog.models import User, Tag, Article
 from . import admin_blu
 
 
-def is_admin():
-    #  访问后台权限验证
-    num = session.get("num", None)
-    if num:
-        return True
-    return False
-
-
 @admin_blu.route('/login', methods=["POST"])
 def login():
     # 后台登录验证

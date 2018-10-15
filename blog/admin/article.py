@@ -4,6 +4,8 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileRequired
 from wtforms import SelectField, TextAreaField, FileField, SubmitField
 from wtforms.validators import DataRequired
+
+from blog.admin.admin import is_admin
 from blog.models import Category, Tag, User
 
 
@@ -23,6 +25,9 @@ class AddArticleForm(FlaskForm):
 
 
 class AddArticleView(BaseView):
+
+    def is_accessible(self):
+        return is_admin()
 
     @expose('/', methods=["POST", "GET"])
     def index(self):

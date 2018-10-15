@@ -1,11 +1,18 @@
-from flask_admin import BaseView, expose
+from flask import session as se
 from flask_admin.contrib.sqla import ModelView
 from blog import blog_admin, db
 from blog.models import User
 from blog.models import Article
 from blog.models import Category
 from blog.models import Tag
-from blog.modules.admin import is_admin
+
+
+def is_admin():
+    #  访问后台权限验证
+    num = se.get("num", None)
+    if num:
+        return True
+    return False
 
 
 class UserView(ModelView):
