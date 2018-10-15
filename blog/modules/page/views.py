@@ -110,7 +110,7 @@ def archive():
             time = str(year) + str(month)
             articles_list[time] = db.session.query(Article).filter(
                 and_(extract('year', Article.create_time) == year,
-                     extract('month', Article.create_time) == month)).all()
+                     extract('month', Article.create_time) == month)).order_by(Article.create_time.desc()).all()
     except Exception as e:
         current_app.logger.error(e)
         abort(500)
