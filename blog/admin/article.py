@@ -19,7 +19,7 @@ class AddArticleForm(FlaskForm):
 
     cover = FileField("封面", validators=[FileRequired("没有选择文件"), FileAllowed(['jpg', 'png'])])
 
-    context = TextAreaField("内容", validators=[DataRequired("请输入内容")])
+    content = TextAreaField("内容", validators=[DataRequired("请输入内容")])
 
 
 class AddArticleView(BaseView):

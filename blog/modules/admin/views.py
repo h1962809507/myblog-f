@@ -2,8 +2,9 @@ import time
 
 from flask import flash, request, redirect, session, current_app
 
+from blog import db
 from blog.admin.upload_image import storage
-from blog.models import User
+from blog.models import User, Tag, Article
 from . import admin_blu
 
 
@@ -44,15 +45,49 @@ def login():
 
 @admin_blu.route("/add_article", methods=["POST"])
 def add_article():
+    # 获取数据
     print(request.form)
+    title = request.form.get("title")
+    digest = request.form.get("digest")
+    author_id = request.form.get("author")
+    category_id = request.form.get("category")
+    tag_id = request.form.get("tag")
+    content = request.form.get("content")
+
+    date = int(time.time())
+    key = "blog/cover/" + str(date)
+
+    cover_url = "http://image.mxuanli.cn/" + key
+
+    # 验证数据
+    if not all([title, digest, author_id, category_id, tag_id, content, cover_url]):
+        return "参数不全"
+    try:
+        author_id = int(author_id)
+        category_id = int(category_id)
+        tag_id = int(tag_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return "参数错误"
+
     try:
         img = request.files.get("cover").read()
     except Exception as e:
         current_app.logger.error(e)
         return "图片获取失败"
 
-    date = int(time.time())
-    key = "blog/cover/" + str(date)
+    # 保存数据
+    article = Article()
+    article.title = title
+    article.digest = digest
+    article.author = author_id
+    article.category_id = category_id
+    article.tag_id = tag_id
+    article.content = content
+    article.cover_url = cover_url
+
+    # 插入数据
+    db.session.add(article)
 
     # 图片到七牛
     try:
@@ -60,5 +95,13 @@ def add_article():
     except Exception as e:
         current_app.logger.error(e)
         return "上传图片错误"
-    print("http://image.mxuanli.cn/"+url)
-    return "xixi"
+
+    # 保存数据到数据库
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return "数据保存失败"
+
+    return "ok"

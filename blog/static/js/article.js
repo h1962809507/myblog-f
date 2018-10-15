@@ -10,8 +10,13 @@ function ajaxSubmitForm() {
      $("#article").ajaxSubmit({
          url: "/add_article",
          type: "POST",
-         success: function () {
-             alert("成功");
+         success: function (resp) {
+             if(resp == "ok"){
+                 alert("成功");
+             }else{
+                 alert(resp)
+             }
+
          },
          error: function(){
             alert('失败！');
