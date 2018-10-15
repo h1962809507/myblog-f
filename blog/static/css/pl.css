@@ -88,9 +88,9 @@
 }
 
 .reply_sub{
-    background:#76b6f4;
+    background:#B0BEC5;
     border:0px;
-    border-radius:2px;
+    border-radius:4px;
     color:#fff;
     margin:0px 5px 0 10px;
     cursor:pointer;
@@ -103,8 +103,15 @@
     border-radius:4px;
     padding:10px;
     outline:none;
-    border:1px solid #2185ed;
+    border:1px solid #9E9E9E;
 }
+
+.name_email_url{
+    margin: 5px;
+    border-radius:4px;
+    border:1px solid #9E9E9E;
+}
+
 .reply_cancel{
     border:0px;
     border-radius:2px;
@@ -117,7 +124,7 @@
 .reply_form{
     width:650px;
     overflow:hidden;
-    margin:10px 0 0 60px;
+    margin:10px 0 0 10px;
     display:none;
 }
 

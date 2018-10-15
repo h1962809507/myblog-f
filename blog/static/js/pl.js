@@ -35,8 +35,12 @@ $(function(){
 
         if(sHandler.indexOf('comment_reply')>=0)
         {
-            $(this).parent().parent().find(".reply_form").toggle();
+            var reply_form = $(this).parent().parent().parent().find(".reply_form");
+            var name = $(this).parent().prev().find(".name").html();
+            reply_form.find(".reply_input").attr("placeholder", "@" + name + "：");
+            reply_form.toggle();
         }
+
 
         if(sHandler.indexOf('reply_cancel')>=0)
         {
