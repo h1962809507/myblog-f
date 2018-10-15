@@ -1,16 +1,14 @@
 import time
-
 from flask import flash, request, redirect, session, current_app
-
 from blog import db
+from blog.admin.admin import is_admin
 from blog.admin.upload_image import storage
-from blog.models import User, Tag, Article
+from blog.models import User, Article
 from . import admin_blu
 
 
 @admin_blu.route('/login', methods=["POST"])
 def login():
-    # 后台登录验证
     num = request.form.get("num")
     password = request.form.get("password")
     user = None

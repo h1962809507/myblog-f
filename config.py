@@ -27,7 +27,7 @@ class Config:
     SESSION_USE_SIGNER = True
     SESSION_REDIS = StrictRedis(host=REDIS_HOST, port=REDIS_PORT)
     SESSION_PERMANENT = False
-    PERMANENT_SESSION_LIFETIME = 86400 * 10
+    PERMANENT_SESSION_LIFETIME = 86400
 
     # 默认的配置等级
     LOG_LEVEL = logging.DEBUG

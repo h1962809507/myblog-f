@@ -1,8 +1,9 @@
-from flask import render_template
+from flask import render_template, redirect, session
 from flask_admin import AdminIndexView, expose
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
+
 
 
 class LoginForm(FlaskForm):
@@ -14,6 +15,10 @@ class LoginForm(FlaskForm):
 class IndexView(AdminIndexView):
     @expose()
     def index(self):
+        # 后台登录验证
+        if session.get("num", None):
+            return redirect("/admin/article")
+
         # 重写AdminIndexView类中index方法，在访问后台首页页面时，执行重写的方法
         login_form = LoginForm()
         return render_template("admin/index.html", form=login_form)
