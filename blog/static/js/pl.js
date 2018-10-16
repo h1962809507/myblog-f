@@ -4,11 +4,19 @@ $(function(){
 
         var sHandler = $(this).prop('class');
 
+        // 显示选中回复框,隐藏其他回复框
         if(sHandler.indexOf('comment_reply')>=0)
         {
             var reply_form = $(this).parent().parent().parent().find(".reply_form");
+            var other_reply_form = $(this).parent().parent().parent().parent().find(".reply_form");
+            other_reply_form.hide()
             reply_name = $(this).parent().prev().find(".name").html();
-            reply_form.find(".reply_input").attr("placeholder", "@" + reply_name + "：");
+            if (reply_name){
+                reply_form.find(".reply_input").attr("placeholder", "@" + reply_name + "：");
+            }else {
+                reply_form.find(".reply_input").attr("placeholder", "发表你的评论");
+            }
+
             reply_form.find(".reply_input").val("");
             reply_form.show();
         }
@@ -37,19 +45,14 @@ $(function(){
             // 取到用户输入的内容.children("first-child") .
             var $this_form = $(this).parent();
             var parent_id = $this_form.parent(".comment_list").find(".user_name").attr("comment_id");
-            var news_id = $this_form.parent().parent().parent().attr("news_id");
+            var article_id = $this_form.parent().parent().parent().attr("news_id");
             var name = $this_form.find(".name").val();
             var email = $this_form.find(".email").val();
             var url = $this_form.find(".url").val();
             var content = $this_form.find(".reply_input").val();
             var csrf_token = $this_form.find(".csrf_token").val();
-            if (!news_id){
+            if (!article_id){
                 $this_form.find(".error").html("新闻不存在！");
-                $this_form.find(".error").show();
-                return;
-            }
-            if (!parent_id){
-                $this_form.find(".error").html("回复不存在！");
                 $this_form.find(".error").show();
                 return;
             }
@@ -75,7 +78,7 @@ $(function(){
             }
 
             var comment = {
-                "news_id": news_id,
+                "article_id": article_id,
                 "parent_id": parent_id,
                 "name": name,
                 "email": email,

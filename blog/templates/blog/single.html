@@ -34,11 +34,34 @@
                     </article>
 
                     <div class="fl col-md-13" news_id="{{ article.id }}">
+
                         <div class="comment_count">
                                 1条评论
                         </div>
 
                         <div class="comment_list_con">
+
+                            <div class="comment_list">
+
+                                <div class="col-md-12">
+                                    <div class="col-md-12 comment_text fl">
+                                        <a href="javascript:;" class="fa fa-comment comment_reply fr">点击发表评论</a>
+                                    </div>
+                                </div>
+
+                                <from class="reply_form">
+                                    <input type="text" placeholder="昵称" class="name_email_url name">
+                                    <input type="text" placeholder="邮箱" class="name_email_url email">
+                                    <input type="text" placeholder="url" class="name_email_url url">
+                                    <textarea  class="reply_input" ></textarea>
+                                    <input type="submit" name="" value="回复" class="reply_sub fr">
+                                    <input type="reset" name="" value="取消" class="reply_cancel fr">
+                                    <p class="col-md-10 error">xixi</p>
+                                    <input type="hidden" class="csrf_token" value="{{ csrf_token() }}">
+                                </from>
+
+                            </div>
+
 
                             <div class="comment_list">
                                 <div class="col-md-12">
@@ -103,23 +126,26 @@
                                         <img src="../../static/img/cat.jpg" alt="用户图标">
                                     </div>
                                     <div>
-                                        <div class="col-md-8 user_name fl name">用户张山</div>
+                                        <div class="col-md-8 user_name fl name" comment_id="1">用户张山</div>
                                         <div class="col-md-8 comment_time fl">2017-01-01 00:00:00</div>
                                     </div>
                                     <div class="col-md-12 comment_text fl">
-                                        <p>如果给定一个表示 DOM 元素集合的 jQuery 对象，.prev() 方法允许我们在 DOM 树中搜索这些元素的前一个同胞元素，并用匹配元素构造一个新的 jQuery 对象。</p>
+                                        <p>prev() 获得匹配元素集合中每个元素紧邻的前一个同胞元素，通过选择器进行筛选是可选的。</p>
                                         <a href="javascript:;" class="fa fa-comment comment_reply fl">回复</a>
                                         <a href="javascript:;" class="fa fa-thumbs-o-up comment_like fl">1</a>
                                     </div>
                                 </div>
 
+
                                 <from class="reply_form">
                                     <input type="text" placeholder="昵称" class="name_email_url name">
                                     <input type="text" placeholder="邮箱" class="name_email_url email">
                                     <input type="text" placeholder="url" class="name_email_url url">
-                                    <textarea  class="reply_input" placeholder=""></textarea>
+                                    <textarea  class="reply_input" ></textarea>
                                     <input type="submit" name="" value="回复" class="reply_sub fr">
                                     <input type="reset" name="" value="取消" class="reply_cancel fr">
+                                    <p class="col-md-10 error">xixi</p>
+                                    <input type="hidden" class="csrf_token" value="{{ csrf_token() }}">
                                 </from>
 
                             </div>
