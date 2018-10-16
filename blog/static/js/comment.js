@@ -1,5 +1,6 @@
 $(function(){
 
+
     $('.comment_list_con').delegate('a,input','click',function(){
 
         var sHandler = $(this).prop('class');
@@ -9,8 +10,9 @@ $(function(){
         {
             var reply_form = $(this).parent().parent().parent().find(".reply_form");
             var other_reply_form = $(this).parent().parent().parent().parent().find(".reply_form");
-            other_reply_form.hide()
+            other_reply_form.hide();
             reply_name = $(this).parent().prev().find(".name").html();
+
             if (reply_name){
                 reply_form.find(".reply_input").attr("placeholder", "@" + reply_name + "：");
             }else {
