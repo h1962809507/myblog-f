@@ -98,6 +98,7 @@ $(function(){
                 success: function (resp) {
                  if(resp == "ok"){
                          $this_form.find(".error").hide();
+                         $this_form.hide();
                          alert("回复成功");
                      }else{
                          alert(resp)
