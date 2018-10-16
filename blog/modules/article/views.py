@@ -1,5 +1,5 @@
 import markdown
-from flask import render_template, current_app, abort
+from flask import render_template, current_app, abort, request
 
 from blog import db
 from blog.models import Article
@@ -28,4 +28,5 @@ def detail(code):
 
 @article_blu.route("/comment", methods=["POST"])
 def comment():
+    print(request.json)
     return "ok"

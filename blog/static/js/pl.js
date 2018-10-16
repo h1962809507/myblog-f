@@ -42,7 +42,7 @@ $(function(){
             var email = $this_form.find(".email").val();
             var url = $this_form.find(".url").val();
             var content = $this_form.find(".reply_input").val();
-
+            var csrf_token = $this_form.find(".csrf_token").val();
             if (!news_id){
                 $this_form.find(".error").html("新闻不存在！");
                 $this_form.find(".error").show();
@@ -73,6 +73,7 @@ $(function(){
                 $this_form.find(".error").show();
                 return;
             }
+
             var comment = {
                 "news_id": news_id,
                 "parent_id": parent_id,
@@ -85,10 +86,12 @@ $(function(){
             $.ajax({
                 url: '/comment',
                 type: 'POST',
-                dataType: 'json',
                 // 把js对象转换为json格式
                 data: JSON.stringify(comment),
                 contentType: 'application/json',
+                headers: {
+                    "X-CSRFToken": csrf_token
+                },
                 success: function (resp) {
                  if(resp == "ok"){
                          $this_form.find(".error").hide();
@@ -98,7 +101,7 @@ $(function(){
                      }
                  },
                  error: function(){
-                    alert('失败！');
+                    alert('回复失败');
                  },
             })
 
