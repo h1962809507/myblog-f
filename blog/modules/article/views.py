@@ -24,3 +24,8 @@ def detail(code):
                                       'markdown.extensions.toc',
                                   ])
     return render_template("blog/single.html", article=article)
+
+
+@article_blu.route("/comment", methods=["POST"])
+def comment():
+    return "ok"
