@@ -71,36 +71,37 @@
                                 {% if not article.parent_id %}
                             <div class="comment_list">
                                 <div class="col-md-12">
-                                    <div class="person_pic  fl">
-                                        <img src="../../static/img/cat.jpg" alt="用户图标">
-                                    </div>
-                                    <div>
-                                        <div class="col-md-8 user_name fl name" comment_id="{{ article.id }}">{{ article.nick_name }}</div>
-                                        <div class="col-md-8 comment_time fl">{{ article.create_time }}</div>
-                                    </div>
-                                    <div class="col-md-12 comment_text fl">
-                                        <p>{{ article.content }}</p>
+                                    <div class="parent_comment">
+                                        <div class="person_pic fl">
+                                            <img src="../../static/img/cat.jpg" alt="用户图标">
+                                        </div>
+                                        <div>
+                                            <div class="col-md-8 user_name fl name" comment_id="{{ article.id }}">{{ article.nick_name }}</div>
+                                            <div class="col-md-8 comment_time fl">{{ article.create_time }}</div>
+                                        </div>
+                                        <div class="col-md-12 comment_text fl">
+                                            <p>{{ article.content }}</p>
+                                        </div>
                                         <a href="javascript:;" class="fa fa-comment comment_reply fl">回复</a>
                                         <a href="javascript:;" class="fa fa-thumbs-o-up comment_like fl">1</a>
                                     </div>
                                 </div>
 
-                                {% for child in article.childs %}
                                 <div class="col-md-10 reply_text_con fl">
-
-                                    <div>
-                                        <a href="{{ child.url}}" class="user_name2 name" comment_id="{{ child.id }}">{{ child.nick_name }}</a>@
-                                        <a href="#" class="user_name2">{{ child.reply_name }}</a>：
-                                        <span class="reply_text">
-                                            {{ child.content }}
-                                        </span>
-                                    </div>
-                                    <div>
+                                {% for child in article.childs %}
+                                    <div class="child_comment">
+                                        <div>
+                                            <a href="{{ child.url}}" class="user_name2 name" comment_id="{{ child.id }}">{{ child.nick_name }}</a>@
+                                            <a href="#" class="user_name2">{{ child.reply_name }}</a>：
+                                            <span class="reply_text">
+                                                {{ child.content }}
+                                            </span>
+                                        </div>
                                         <span class="comment_time">{{ child.create_time }}</span>
                                         <a href="javascript:;" class="fa fa-comment son_comment_reply">回复</a>
                                     </div>
-                                </div>
                                  {% endfor %}
+                                </div>
 
                                 <from class="reply_form">
                                     <input type="text" placeholder="昵称" class="name_email_url name">
@@ -119,46 +120,49 @@
 
 
                             <div class="comment_list">
+
                                 <div class="col-md-12">
-                                    <div class="person_pic  fl">
-                                        <img src="../../static/img/cat.jpg" alt="用户图标">
-                                    </div>
-                                    <div>
-                                        <div class="col-md-8 user_name fl name" comment_id="1">用户张山</div>
-                                        <div class="col-md-8 comment_time fl">2017-01-01 00:00:00</div>
-                                    </div>
-                                    <div class="col-md-12 comment_text fl">
-                                        <p>prev() 获得匹配元素集合中每个元素紧邻的前一个同胞元素，通过选择器进行筛选是可选的。</p>
+                                    <div class="parent_comment">
+                                        <div class="person_pic fl">
+                                            <img src="../../static/img/cat.jpg" alt="用户图标">
+                                        </div>
+                                        <div>
+                                            <div class="col-md-8 user_name fl name" comment_id="1">用户张山</div>
+                                            <div class="col-md-8 comment_time fl">2017-01-01 00:00:00</div>
+                                        </div>
+                                        <div class="col-md-12 comment_text fl">
+                                            <p>prev() 获得匹配元素集合中每个元素紧邻的前一个同胞元素，通过选择器进行筛选是可选的。</p>
+                                        </div>
                                         <a href="javascript:;" class="fa fa-comment comment_reply fl">回复</a>
                                         <a href="javascript:;" class="fa fa-thumbs-o-up comment_like fl">1</a>
                                     </div>
                                 </div>
 
                                 <div class="col-md-10 reply_text_con fl">
-                                    <div>
-                                        <a href="#" class="user_name2 name" comment_id="2">李思</a>@
-                                        <a href="#" class="user_name2">老王</a>：
-                                        <span class="reply_text">
-                                            该方法接受可选的选择器表达式，与我们向 $() 函数中传递的参数类型相同。如果应用这个选择器，则将通过检测元素是否匹配该选择器对元素进行筛选。
-                                        </span>
-                                    </div>
-                                    <div>
+                                    <div class="child_comment">
+                                        <div>
+                                            <a href="#" class="user_name2 name" comment_id="2">李思</a>@
+                                            <a href="#" class="user_name2">老王</a>：
+                                            <span class="reply_text">
+                                                该方法接受可选的选择器表达式，与我们向 $() 函数中传递的参数类型相同。如果应用这个选择器，则将通过检测元素是否匹配该选择器对元素进行筛选。
+                                            </span>
+                                        </div>
                                         <span class="comment_time">2017-01-01 00:00:00</span>
                                         <a href="javascript:;" class="fa fa-comment son_comment_reply">回复</a>
                                     </div>
-                                </div>
-                                <div class="col-md-10 reply_text_con fl">
-                                    <div>
-                                        <a href="#" class="user_name2 name" comment_id="3">老王</a>@
-                                        <a href="#" class="user_name2">李思</a>：
-                                        <span class="reply_text">
-                                            cnm
-                                        </span>
-                                    </div>
-                                    <div>
+
+                                    <div class="child_comment">
+                                        <div>
+                                            <a href="#" class="user_name2 name" comment_id="3">老王</a>@
+                                            <a href="#" class="user_name2">李思</a>：
+                                            <span class="reply_text">
+                                                cnm
+                                            </span>
+                                        </div>
                                         <span class="comment_time">2017-01-01 00:00:00</span>
                                         <a href="javascript:;" class="fa fa-comment son_comment_reply">回复</a>
                                     </div>
+
                                 </div>
 
                                 <from class="reply_form">
@@ -176,15 +180,17 @@
 
                             <div class="comment_list">
                                 <div class="col-md-12">
-                                    <div class="person_pic  fl">
-                                        <img src="../../static/img/cat.jpg" alt="用户图标">
-                                    </div>
-                                    <div>
-                                        <div class="col-md-8 user_name fl name" comment_id="1">用户张山</div>
-                                        <div class="col-md-8 comment_time fl">2017-01-01 00:00:00</div>
-                                    </div>
-                                    <div class="col-md-12 comment_text fl">
-                                        <p>prev() 获得匹配元素集合中每个元素紧邻的前一个同胞元素，通过选择器进行筛选是可选的。</p>
+                                    <div class="parent_comment">
+                                        <div class="person_pic fl">
+                                            <img src="../../static/img/cat.jpg" alt="用户图标">
+                                        </div>
+                                        <div>
+                                            <div class="col-md-8 user_name fl name" comment_id="1">用户张山</div>
+                                            <div class="col-md-8 comment_time fl">2017-01-01 00:00:00</div>
+                                        </div>
+                                        <div class="col-md-12 comment_text fl">
+                                            <p>prev() 获得匹配元素集合中每个元素紧邻的前一个同胞元素，通过选择器进行筛选是可选的。</p>
+                                        </div>
                                         <a href="javascript:;" class="fa fa-comment comment_reply fl">回复</a>
                                         <a href="javascript:;" class="fa fa-thumbs-o-up comment_like fl">1</a>
                                     </div>
