@@ -129,7 +129,7 @@ $(function(){
                              comment_list += '<input type="submit" name="" value="回复" class="reply_sub fr">';
                              comment_list += '<input type="reset" name="" value="取消" class="reply_cancel fr">';
                              comment_list += '<p class="col-md-10 error"></p>';
-                             comment_list += '<input type="hidden" class="csrf_token" value="{{ csrf_token() }}">';
+                             comment_list += '<input type="hidden" class="csrf_token" value="'+csrf_token+'">';
                              comment_list += '</from>';
                              comment_list += '</div>';
                              $(".comment_list_con").append(comment_list);
