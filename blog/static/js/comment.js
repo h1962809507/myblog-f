@@ -120,7 +120,8 @@ $(function(){
                              comment_list += '<a href="javascript:;" class="fa fa-thumbs-o-up comment_like fl">0</a>';
                              comment_list += '</div>';
                              comment_list += '</div>';
-
+                             comment_list += '<div class="col-md-10 reply_text_con fl">';
+                             comment_list += '</div>';
                              comment_list += '<from class="reply_form">';
                              comment_list += '<input type="text" placeholder="昵称" class="name_email_url name">';
                              comment_list += '<input type="text" placeholder="邮箱" class="name_email_url email">';
@@ -150,7 +151,7 @@ $(function(){
                              child_comment+='<a href="javascript:;" class="fa fa-comment son_comment_reply">回复</a>';
                              child_comment+='</div>';
                              child_comment_list.append(child_comment);
-                             alert("子回复成功");
+                             alert("回复成功");
                          }
 
                      }else{
