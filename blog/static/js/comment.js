@@ -85,9 +85,9 @@ $(function(){
                 "name": name,
                 "email": email,
                 "url": url,
-                "content": content
+                "content": content,
+                "reply_name": reply_name
             };
-
             $.ajax({
                 url: '/comment',
                 type: 'POST',

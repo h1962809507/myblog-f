@@ -41,6 +41,7 @@ def comment_view():
     email = data.get("email")
     url = data.get("url")
     content = data.get("content")
+    reply_name = data.get("reply_name")
 
     # 验证参数
     if not all([article_id, name, email, url, content]):
@@ -61,6 +62,7 @@ def comment_view():
     comment.email = email
     comment.url = url
     comment.content = content
+    comment.reply_name = reply_name
 
     db.session.add(comment)
 

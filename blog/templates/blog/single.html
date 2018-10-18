@@ -33,6 +33,12 @@
                         </div>
                     </article>
 
+                    {% for article in article.comment %}
+                        {% if not article.parent_id %}
+                            {{ article }}
+                        {% endif %}
+                    {% endfor %}
+
                     <div class="fl col-md-13" news_id="{{ article.id }}">
 
                         <div class="comment_count">
@@ -42,7 +48,6 @@
                         <div class="comment_list_con">
 
                             <div class="comment_list">
-
                                 <div class="col-md-12">
                                     <div class="col-md-12 comment_text fl">
                                         <a href="javascript:;" class="fa fa-comment comment_reply fr">点击发表评论</a>
@@ -59,8 +64,58 @@
                                     <p class="col-md-10 error">xixi</p>
                                     <input type="hidden" class="csrf_token" value="{{ csrf_token() }}">
                                 </from>
+                            </div>
+
+
+                            {% for article in article.comment %}
+                                {% if not article.parent_id %}
+                            <div class="comment_list">
+                                <div class="col-md-12">
+                                    <div class="person_pic  fl">
+                                        <img src="../../static/img/cat.jpg" alt="用户图标">
+                                    </div>
+                                    <div>
+                                        <div class="col-md-8 user_name fl name" comment_id="{{ article.id }}">{{ article.nick_name }}</div>
+                                        <div class="col-md-8 comment_time fl">{{ article.create_time }}</div>
+                                    </div>
+                                    <div class="col-md-12 comment_text fl">
+                                        <p>{{ article.content }}</p>
+                                        <a href="javascript:;" class="fa fa-comment comment_reply fl">回复</a>
+                                        <a href="javascript:;" class="fa fa-thumbs-o-up comment_like fl">1</a>
+                                    </div>
+                                </div>
+
+                                {% for child in article.childs %}
+                                <div class="col-md-10 reply_text_con fl">
+
+                                    <div>
+                                        <a href="{{ child.url}}" class="user_name2 name" comment_id="{{ child.id }}">{{ child.nick_name }}</a>@
+                                        <a href="#" class="user_name2">{{ child.reply_name }}</a>：
+                                        <span class="reply_text">
+                                            {{ child.content }}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="comment_time">{{ child.create_time }}</span>
+                                        <a href="javascript:;" class="fa fa-comment son_comment_reply">回复</a>
+                                    </div>
+                                </div>
+                                 {% endfor %}
+
+                                <from class="reply_form">
+                                    <input type="text" placeholder="昵称" class="name_email_url name">
+                                    <input type="text" placeholder="邮箱" class="name_email_url email">
+                                    <input type="text" placeholder="url" class="name_email_url url">
+                                    <textarea  class="reply_input" ></textarea>
+                                    <input type="submit" name="" value="回复" class="reply_sub fr">
+                                    <input type="reset" name="" value="取消" class="reply_cancel fr">
+                                    <p class="col-md-10 error">xixi</p>
+                                    <input type="hidden" class="csrf_token" value="{{ csrf_token() }}">
+                                </from>
 
                             </div>
+                                 {% endif %}
+                            {% endfor %}
 
 
                             <div class="comment_list">
@@ -80,7 +135,6 @@
                                 </div>
 
                                 <div class="col-md-10 reply_text_con fl">
-
                                     <div>
                                         <a href="#" class="user_name2 name" comment_id="2">李思</a>@
                                         <a href="#" class="user_name2">老王</a>：

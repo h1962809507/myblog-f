@@ -85,10 +85,14 @@ class Comment(db.Model):
     content = db.Column(db.Text, nullable=False)  # 评论内容 不允许为空
     article_id = db.Column(db.Integer, db.ForeignKey("article.id"))  # 评论文章的id 外键
     parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"))  # 父评论id 自关联外键
-    nick_name = db.Column(db.String(64), nullable=False)  # 用户名，不允许重复为空
+    nick_name = db.Column(db.String(64), nullable=False)  # 用户名，不允许为空
     email = db.Column(db.String(48), nullable=True)  # 邮箱
     url = db.Column(db.String(48), nullable=True, default="#")  # 网址
+    reply_name = db.Column(db.String(64))  # 被回复人id
     create_time = db.Column(db.DateTime, default=datetime.now)  # 创建时间
+
+    parent = db.relationship("Comment", remote_side=[id],
+                             backref=db.backref('childs', lazy='dynamic'))
 
     def __repr__(self):
         return self.content
