@@ -62,7 +62,7 @@
                             </div>
 
 
-                            {% for article in article.comment %}
+                            {% for article in article.comment[::-1] %}
                                 {% if not article.parent_id %}
                             <div class="comment_list">
                                 <div class="col-md-12">
