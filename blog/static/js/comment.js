@@ -101,9 +101,9 @@ $(function(){
                          $this_form.find(".error").hide();
                          $this_form.hide();
                          if(!parent_id){
-                             var comment_list_con = $(".comment_list_con").html();
-                             alert(comment_list_con);
-                             var comment_list = '<div class="comment_list">';
+                             var comment_list_con = $(".comment_list_con");
+                             var comment_list = '';
+                             comment_list = '<div class="comment_list">';
                              comment_list += '<div class="col-md-12">';
                              comment_list += '<div class="parent_comment">';
                              comment_list += '<div class="person_pic fl">';
@@ -136,6 +136,20 @@ $(function(){
                              alert("回复成功");
                          }
                          else {
+                             var child_comment_list = $this_form.prev();
+                             var child_comment = '';
+                             child_comment+='<div class="child_comment">';
+                             child_comment+='<div>';
+                             child_comment+='<a href="#" class="user_name2 name" comment_id='+ resp.comment_id +'">'+name+'</a>@';
+                             child_comment+='<a href="#" class="user_name2">'+reply_name+'</a>：';
+                             child_comment+='<span class="reply_text">';
+                             child_comment+=content;
+                             child_comment+='</span>';
+                             child_comment+='</div>';
+                             child_comment+='<span class="comment_time">'+resp.comment_time+'</span>';
+                             child_comment+='<a href="javascript:;" class="fa fa-comment son_comment_reply">回复</a>';
+                             child_comment+='</div>';
+                             child_comment_list.append(child_comment);
                              alert("子回复成功");
                          }
 
