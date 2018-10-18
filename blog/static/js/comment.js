@@ -97,12 +97,50 @@ $(function(){
                     "X-CSRFToken": csrf_token
                 },
                 success: function (resp) {
-                 if(resp == "ok"){
+                 if(resp.state == "ok"){
                          $this_form.find(".error").hide();
                          $this_form.hide();
-                         alert("回复成功");
+                         if(!parent_id){
+                             var comment_list_con = $(".comment_list_con").html();
+                             alert(comment_list_con);
+                             var comment_list = '<div class="comment_list">';
+                             comment_list += '<div class="col-md-12">';
+                             comment_list += '<div class="parent_comment">';
+                             comment_list += '<div class="person_pic fl">';
+                             comment_list += '<img src="../../static/img/cat.jpg" alt="用户图标">';
+                             comment_list += '</div>';
+                             comment_list += '<div>';
+                             comment_list += '<div class="col-md-8 user_name fl name" comment_id="'+ resp.comment_id +'">'+name+'</div>';
+                             comment_list += '<div class="col-md-8 comment_time fl">'+ resp.comment_time +'</div>';
+                             comment_list += '</div>';
+                             comment_list += '<div class="col-md-12 comment_text fl">';
+                             comment_list += '<p>'+content+'</p>';
+                             comment_list += '</div>';
+                             comment_list += '<a href="javascript:;" class="fa fa-comment comment_reply fl">回复</a>';
+                             comment_list += '<a href="javascript:;" class="fa fa-thumbs-o-up comment_like fl">0</a>';
+                             comment_list += '</div>';
+                             comment_list += '</div>';
+
+                             comment_list += '<from class="reply_form">';
+                             comment_list += '<input type="text" placeholder="昵称" class="name_email_url name">';
+                             comment_list += '<input type="text" placeholder="邮箱" class="name_email_url email">';
+                             comment_list += '<input type="text" placeholder="url" class="name_email_url url">';
+                             comment_list += '<textarea  class="reply_input" ></textarea>';
+                             comment_list += '<input type="submit" name="" value="回复" class="reply_sub fr">';
+                             comment_list += '<input type="reset" name="" value="取消" class="reply_cancel fr">';
+                             comment_list += '<p class="col-md-10 error"></p>';
+                             comment_list += '<input type="hidden" class="csrf_token" value="{{ csrf_token() }}">';
+                             comment_list += '</from>';
+                             comment_list += '</div>';
+                             $(".comment_list_con").append(comment_list);
+                             alert("回复成功");
+                         }
+                         else {
+                             alert("子回复成功");
+                         }
+
                      }else{
-                         alert(resp)
+                         alert(resp.state)
                      }
                  },
                  error: function(){
@@ -114,4 +152,4 @@ $(function(){
         }
     })
 
-})
+});

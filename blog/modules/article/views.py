@@ -1,5 +1,5 @@
 import markdown
-from flask import render_template, current_app, abort, request
+from flask import render_template, current_app, abort, request, jsonify
 
 from blog import db
 from blog.models import Article, Comment
@@ -45,14 +45,14 @@ def comment_view():
 
     # 验证参数
     if not all([article_id, name, email, url, content]):
-        return "参数不足"
+        return jsonify(state="参数不足")
     try:
         article_id = int(article_id)
         if parent_id:
             parent_id = int(parent_id)
     except Exception as e:
         current_app.logger.error(e)
-        return "参数错误"
+        return jsonify(state="参数错误")
 
     # 保存数据
     comment = Comment()
@@ -72,6 +72,8 @@ def comment_view():
     except Exception as e:
         current_app.logger.error(e)
         db.session.rollback()
-        return "数据保存失败"
-
-    return "ok"
+        return jsonify(state="数据保存失败")
+    comment_id = comment.id
+    print(comment.create_time)
+    comment_time = str(comment.create_time)
+    return jsonify(state="ok", comment_id=comment_id, comment_time=comment_time)
