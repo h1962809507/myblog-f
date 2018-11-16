@@ -21,7 +21,9 @@
                         <div class="col-md-6 col-sm-6">
                             <article class=" blog-teaser">
                                 <header>
-                                    <img src="{{ article.cover_url }}" alt="">
+                                    <div style="max-height:300px;overflow: hidden;">
+                                        <img src="{{ article.cover_url }}" alt="">
+                                    </div>
                                     <h3><a href="single.html">{{ article.title }}</a></h3>
                                     <span class="meta">{{ article.create_time }}-{{ article.user.nick_name }}</span>
                                     <hr>

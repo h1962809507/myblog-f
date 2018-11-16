@@ -28,6 +28,7 @@ def detail(code):
 
 @article_blu.route("/comment", methods=["POST"])
 def comment_view():
+    """保存评论"""
     # article_id 文章id
     # parent_id 父评论id
     # name 回复者名字

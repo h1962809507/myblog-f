@@ -28,7 +28,7 @@
                                 <i class="fa fa-user"></i> {{ article.user.nick_name }}
                                 <i class="fa fa-calendar"></i>{{ article.create_time }}
                                 <i class="fa fa-eye"></i>{{ article.click }}
-                                <i class="fa fa-comment"></i>测试
+                                <i class="fa fa-comment"></i>{{ article.comment | list | length}}
                             </div>
                             {{ article.content | safe }}
                         </div>
@@ -37,7 +37,7 @@
                     <div class="fl col-md-13" news_id="{{ article.id }}">
 
                         <div class="comment_count">
-                                1条评论
+                                {{ article.comment | list | length}}条评论
                         </div>
 
                         <div class="comment_list_con">
