@@ -1,4 +1,4 @@
-"""首页视图相关"""
+"""首页归档关于等..视图相关"""
 from flask import Blueprint
 
 

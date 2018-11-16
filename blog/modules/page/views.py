@@ -1,5 +1,5 @@
 import collections
-from flask import render_template, abort, current_app
+from flask import render_template, abort, current_app, request, redirect
 from blog import db
 from blog.models import Article, Category, Tag, User
 from . import page_blu
@@ -116,3 +116,14 @@ def archive():
         abort(500)
     name = "归档"
     return render_template("blog/archives.html", articles=articles_list, name=name)
+
+
+@page_blu.route("/search")
+def search():
+    # 搜索跳转谷歌
+    text = request.args.get('text')
+    # https://www.baidu.com/s?wd=site:mxuanli.cn%20
+    url = "https://www.google.com.hk/search?q=site:mxuanli.cn%20"
+    url += text
+
+    return redirect(url)
