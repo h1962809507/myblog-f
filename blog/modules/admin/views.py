@@ -48,7 +48,7 @@ def add_article():
         return "数据获取失败"
 
     date = int(time.time())
-    key = "blog/cover/" + str(date)
+    key = "blog/cover/local/" + str(date)
 
     cover_url = "http://image.mxuanli.cn/" + key
 

@@ -13,6 +13,7 @@ function ajaxSubmitForm() {
          success: function (resp) {
              if(resp == "ok"){
                  alert("成功");
+                 window.location.reload();
              }else{
                  alert(resp)
              }
