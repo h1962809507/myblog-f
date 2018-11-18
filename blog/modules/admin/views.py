@@ -36,13 +36,16 @@ def login():
 @admin_blu.route("/add_article", methods=["POST"])
 def add_article():
     # 获取数据
-    print(request.form)
-    title = request.form.get("title")
-    digest = request.form.get("digest")
-    author_id = request.form.get("author")
-    category_id = request.form.get("category")
-    tag_id = request.form.get("tag")
-    content = request.form.get("content")
+    try:
+        title = request.form.get("title")
+        digest = request.form.get("digest")
+        author_id = request.form.get("author")
+        category_id = request.form.get("category")
+        tag_id = request.form.get("tag")
+        content = request.form.get("content")
+    except Exception as e:
+        current_app.logger.error(e)
+        return "数据获取失败"
 
     date = int(time.time())
     key = "blog/cover/" + str(date)

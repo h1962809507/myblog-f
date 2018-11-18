@@ -11,7 +11,7 @@ bucket_name = 'xuanli'
 
 
 def storage(data, key):
-    """七牛云存储上传文件接口"""
+    """七牛云存储上传文件接口,data图片，key名字"""
     if not data:
         return None
     if not key:
@@ -31,6 +31,7 @@ def storage(data, key):
         raise e
 
     if info and info.status_code != 200:
+        logging.error("上传文件到七牛失败，状态码：%s" % info.status_code)
         raise Exception("上传文件到七牛失败")
 
     # 返回七牛中保存的图片名，这个图片名也是访问七牛获取图片的路径
@@ -40,4 +41,4 @@ def storage(data, key):
 if __name__ == '__main__':
     file_name = input("输入上传的文件")
     with open(file_name, "rb") as f:
-        storage(f.read())
+        storage(f.read(), 'text')

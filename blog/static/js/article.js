@@ -18,8 +18,8 @@ function ajaxSubmitForm() {
              }
 
          },
-         error: function(){
-            alert('失败！');
-        },
+         error:function(XMLHttpRequest, textStatus, errorThrown){
+            alert(XMLHttpRequest.status+errorThrown);
+         },
      })
  }
