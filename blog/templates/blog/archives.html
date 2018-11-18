@@ -53,7 +53,7 @@
                         <div class="body">
                             <ul class="clean-list">
                                 {% for category in blog_tag().categories %}
-                                <li><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                                <li><a href="/category/{{ category.id }}">{{ category.name }}（{{ category.article.count() }}）</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
