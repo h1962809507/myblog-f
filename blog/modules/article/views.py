@@ -20,8 +20,9 @@ def detail(code):
     article.content = markdown.markdown(article.content,
                                   extensions=[
                                       'markdown.extensions.extra',
-                                      'markdown.extensions.codehilite',
                                       'markdown.extensions.toc',
+                                      'markdown.extensions.tables',
+                                      'markdown.extensions.codehilite',
                                   ])
     return render_template("blog/single.html", article=article)
 
