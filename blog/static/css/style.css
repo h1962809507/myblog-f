@@ -691,7 +691,9 @@ The blog main page boxes
   background-color: #fff;
   border: 1px solid #ddd;
   margin-bottom: 40px;
+  height: 460px;
 }
+
 
 @media (min-width: 768px) and (max-width: 979px) {
   .blog-teaser {
@@ -734,6 +736,7 @@ The blog main page boxes
 }
 
 .blog-teaser .body {
+  font-size: 16px;
   padding-right: 25px;
   padding-left: 25px;
   margin-bottom: 10px;

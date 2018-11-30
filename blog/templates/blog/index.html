@@ -24,18 +24,19 @@
                                     <div style="max-height:300px;overflow: hidden;">
                                         <a href="/article/{{ article.id }}"><img src="{{ article.cover_url }}" alt="封面"></a>
                                     </div>
-                                    <h3><a href="/article/{{ article.id }}">{{ article.title }}</a></h3>
+                                    <h4><a href="/article/{{ article.id }}">{{ article.title }}</a></h4>
                                     <span class="meta">{{ article.create_time }}-{{ article.user.nick_name }}</span>
                                     <hr>
                                 </header>
 
-                                <div class="body">
-                                    {{ article.digest }}
-                                </div>
-
-                                <div class="clearfix">
-                                    <a href="/article/{{ article.id }}" class="btn btn-clean-one">继续阅读</a>
-                                </div>
+                                <a href="/article/{{ article.id }}">
+                                    <div class="body">
+                                        {{ article.digest }}
+                                    </div>
+                                </a>
+{#                                <div class="clearfix continue">#}
+{#                                    <a href="/article/{{ article.id }}" class="btn btn-clean-one">继续阅读</a>#}
+{#                                </div>#}
 
                             </article>
                         </div>
