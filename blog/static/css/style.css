@@ -1412,4 +1412,9 @@ fieldset[disabled] .btn-clean-two.active {
     .side-toc{
       display: none;
     }
+
+}
+
+img{
+  max-width: 100%;
 }
