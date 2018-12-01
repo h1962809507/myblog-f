@@ -120,10 +120,11 @@ def archive():
 
 @page_blu.route("/search")
 def search():
-    # 搜索跳转谷歌
+    # 搜索跳转mezw
     text = request.args.get('text')
     # https://www.baidu.com/s?wd=site:mxuanli.cn%20
-    url = "https://www.google.com.hk/search?q=site:mxuanli.cn%20"
+    # url = "https://www.google.com.hk/search?q=site:mxuanli.cn%20"
+    url = "https://so.mezw.com/Search?wd=site:mxuanli.cn%20"
     url += text
 
     return redirect(url)
