@@ -18,7 +18,15 @@
 
     <div class="widewrapper main">
         <div class="container">
-            <div class="row">
+
+                <aside class="col-md-2 blog-aside side-toc">
+                    <header>
+                        <h3>目录</h3>
+                    </header>
+                    <div class="aside-widget">
+                        {{ article.toc | safe}}
+                    </div>
+                </aside>
 
                 <div class="col-md-8 blog-main col-md-offset-2">
                     <article class="blog-post">
@@ -120,6 +128,7 @@
 
             </div>
         </div>
+
     </div>
 
 {% endblock main %}

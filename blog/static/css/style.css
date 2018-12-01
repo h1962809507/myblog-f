@@ -1402,3 +1402,14 @@ fieldset[disabled] .btn-clean-two.active {
     border-color: black transparent transparent black;
     transform:rotate(45deg);
 }
+
+.side-toc{
+    position: absolute;
+    right: 140px;
+}
+
+@media(max-width: 1280px){
+    .side-toc{
+      display: none;
+    }
+}

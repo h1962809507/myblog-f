@@ -17,13 +17,15 @@ def detail(code):
         current_app.logger.error(e)
         abort(500)
 
-    article.content = markdown.markdown(article.content,
-                                  extensions=[
-                                      'markdown.extensions.extra',
-                                      'markdown.extensions.toc',
-                                      'markdown.extensions.tables',
-                                      'markdown.extensions.codehilite',
-                                  ])
+    md = markdown.Markdown(extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.toc',
+        'markdown.extensions.tables',
+        'markdown.extensions.codehilite',
+    ])
+
+    article.content = md.convert(article.content)
+    article.toc = md.toc
     return render_template("blog/single.html", article=article)
 
 
