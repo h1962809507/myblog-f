@@ -1404,6 +1404,10 @@ fieldset[disabled] .btn-clean-two.active {
 }
 
 .side-toc{
+    background-color: #ffffff;
+    border-right:1px solid #ddd;
+    border-left:1px solid #ddd;
+    border-bottom:1px solid #ddd;
     position: absolute;
     right: 140px;
 }
@@ -1418,3 +1422,13 @@ fieldset[disabled] .btn-clean-two.active {
 img{
   max-width: 100%;
 }
+
+/*.single_main{*/
+  /*background-color: #f1f1f1;*/
+/*}*/
+
+/*.blog-main{*/
+  /*background-color: #ffffff;*/
+  /*border-right:1px solid #ddd;*/
+  /*border-left:1px solid #ddd;*/
+/*}*/
